@@ -17,8 +17,8 @@ const handleQueryByPrice = async () => {
   const response = await getHotels(
     { min: minPrice.value, max: maxPrice.value },
   );
-  if (!response.success) return;
   console.log("min", minPrice.value, "max", maxPrice.value)
+  if (!response.success) return;
   console.log("response", response);
   hotels.value = response.data;
   outcome.value=true
@@ -62,7 +62,7 @@ const handleQueryByName = async () =>{
 <h3 class=""font-bold>Check these hotels:
 </h3>
 <div v-for="hotel in hotels">
-      <p>{{ hotel.name }} a nigth for {{ hotel.pricePerNightInUSD }}</p>
+      <p>{{ hotel.name }}: a nigth for {{ hotel.pricePerNightInUSD }} $</p>
     </div>
   </div>
 </div>
