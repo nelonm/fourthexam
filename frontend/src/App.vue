@@ -59,7 +59,7 @@ const handleQueryByName = async () =>{
       Find hotel by price
     </button>
 <div v-if="outcome">
-<h3 class=""font-bold>Check these hotels:
+<h3 class="font-bold">Check these hotels:
 </h3>
 <div v-for="hotel in hotels">
       <p>{{ hotel.name }}: a nigth for {{ hotel.pricePerNightInUSD }} $</p>
