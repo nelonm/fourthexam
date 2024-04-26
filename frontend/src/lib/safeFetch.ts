@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 type Response<Data> =
   | {
@@ -11,7 +11,7 @@ type Response<Data> =
       status: number | null;
     };
 
-    type Method = "GET" | "POST" | "PATCH" | "DELETE";
+type Method = "GET" | "POST" | "PATCH" | "DELETE";
 
 const baseUrl = "http://localhost:3000";
 
@@ -21,7 +21,7 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(config: {
   schema: Schema;
   payload?: any;
 }): Promise<Response<z.infer<typeof config.schema>>> => {
-   let response;
+  let response;
   const { method, url, schema, payload } = config;
   try {
     response = await fetch(baseUrl + url, {
@@ -29,7 +29,6 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(config: {
       headers: payload
         ? {
             "Content-Type": "application/JSON",
-            
           }
         : {},
       body: payload ? JSON.stringify(payload) : undefined,
@@ -38,7 +37,7 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(config: {
     if (response.status >= 500)
       return { success: false, status: response.status };
 
-    if (response.status >= 400){
+    if (response.status >= 400) {
       return { success: false, status: response.status };
     }
 
