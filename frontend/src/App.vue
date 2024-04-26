@@ -4,12 +4,13 @@ import { getHotels } from './api';
 
 const minPrice=ref(0)
 const maxPrice=ref(0)
-const hotels= ref<string>("")
+const hotels= ref<string[]>([])
 
 const handleQuery = async () =>{
-const response = await getHotels(minPrice.value, maxPrice.value)
-console.log(response)
-hotels.value= response.status
+const response = await getHotels({min: minPrice.value, max: maxPrice.value}, "hotel")
+if (!response.success) return;
+console.log("response", response)
+hotels.value=response.data
 }
 </script>
 
@@ -22,7 +23,9 @@ hotels.value= response.status
     <label for="">Highest price</label>
     <input v-model="maxPrice" type="number">
     <button class="btn bg-slate-700 text-gray-50 w-24 rounded" @click="handleQuery">Find Hotel</button>
-    <div></div>
+    <div v-for="hotel in hotels">
+    <p>{{ hotel }}</p>
+</div>
 </div>
 </template>
 

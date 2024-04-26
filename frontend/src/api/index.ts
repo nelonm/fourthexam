@@ -1,10 +1,15 @@
-import { z } from "zod"
+import { number, z } from "zod"
 import { safeFetch } from "../lib/safeFetch"
 import { QuerySchema } from "../model"
 
-export const getHotels = (min: number, max: number) =>
+type Prices = {
+  min: number;
+  max: number;
+}
+
+export const getHotels = (prices:Prices, type:string) =>
     safeFetch({
       method: "GET",
       url: `/api/hotels`,
-      schema: QuerySchema,
+      schema: z.string().array(),
     });
